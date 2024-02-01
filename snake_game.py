@@ -31,15 +31,24 @@ while is_game_on:
     snake.move_snake()
     scoreboard.write_score()
 
-    # Detect food.
+    # Detect food and get longer.
     if snake.head.distance(food) < 15:
         food.refresh()
+        snake.extend()
         scoreboard.increase_score()
 
     # Detect wall
-    if snake.head.xcor() > 280 or snake.head.ycor() < -280 or snake.head.xcor() < -280 or snake.head.ycor() > 280:
+    if snake.head.xcor() > 290 or snake.head.ycor() < -290 or snake.head.xcor() < -290 or snake.head.ycor() > 290:
         scoreboard.game_over()
         is_game_on = False
+
+    # Detect tail
+    for segment in snake.segments:
+        if segment == snake.head:
+            pass
+        elif snake.head.distance(segment) < 10:
+            scoreboard.game_over()
+            is_game_on = False
 
 
 screen.exitonclick()
