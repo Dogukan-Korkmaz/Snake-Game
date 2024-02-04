@@ -1,4 +1,5 @@
 from turtle import Turtle
+import datetime
 ALIGNMENT = "center"
 FONT = ("score", 25, "bold")
 
@@ -28,7 +29,17 @@ class Scoreboard(Turtle):
             self.high_score = self.score
         self.score = 0
         self.write_score()
+        self.write_file()
 
-    # def reset_pos(self):
-    #     self.goto(0, 0)
-    #     # self.write("GAME OVER", False, "center", FONT)
+    def write_file(self):
+        with open("data.txt", "a") as file:
+            new_highscore = self.high_score
+            now = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+            file.write(f"\nYour Highscore : {str(new_highscore)}\nDate : {now}\n")
+            file.write("----------------------------------------------------")
+
+
+
+
+
+
