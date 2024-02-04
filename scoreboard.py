@@ -27,18 +27,22 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            self.write_file()
         self.score = 0
         self.write_score()
-        self.write_file()
 
     def write_file(self):
-        with open("data.txt", "a") as file:
+        with open("data.txt", "w") as file:
             new_highscore = self.high_score
             now = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-            file.write(f"\nYour Highscore : {str(new_highscore)}\nDate : {now}\n")
-            file.write("----------------------------------------------------")
+            file.write(f"Your Highscore : {str(new_highscore)}\nDate : {now}\n")
+            file.write("-----------------------------------------")
 
-
+    def read_file(self):
+        with open("data.txt", "r") as file:
+            line = file.readline()
+            the_highscore = int(line[17:20])
+            self.high_score = the_highscore
 
 
 

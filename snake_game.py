@@ -13,6 +13,7 @@ screen.tracer(0)
 snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
+scoreboard.read_file()
 
 screen.listen()
 screen.onkey(snake.up, "Up")
